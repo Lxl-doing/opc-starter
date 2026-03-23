@@ -1,24 +1,24 @@
--- =====================================================
--- OPC-Starter v1.0 Database Schema
--- =====================================================
--- Version: v1.0.0
+-- migrations/00001_baseline.sql
+-- Seq: 00001
+-- Name: baseline
+-- Story: null
+-- Description: OPC-Starter v1.0 初始 schema
 -- Created: 2026-01-13
 -- 
--- Features: Supabase Auth, RLS, Organization Management
--- Usage: Execute in Supabase SQL Editor (PostgreSQL 14+)
--- 
--- Tables (4):
+-- Tables:
 --   - profiles: 用户资料（1:1 auth.users）
 --   - organizations: 组织架构（ltree 层级）
 --   - organization_members: 组织成员关系
 --   - agent_threads/messages/actions: Agent 会话
+-- 
+-- 注意：这是基线 migration，rollback 为空（或 DROP ALL）
 -- =====================================================
 
 -- =====================================================
 -- 0. Migration Metadata Table (must be first)
 -- =====================================================
 -- This table is the single source of truth for migration state.
--- Every migration (including baseline) registers itself here.
+-- Every migration (including this baseline) registers itself here.
 CREATE TABLE IF NOT EXISTS public._schema_migrations (
   seq TEXT PRIMARY KEY,                      -- '00001', '00002', ...
   name TEXT NOT NULL,                         -- 'baseline', 'add_xxx'
@@ -33,7 +33,10 @@ CREATE TABLE IF NOT EXISTS public._schema_migrations (
 );
 
 COMMENT ON TABLE public._schema_migrations IS 'Migration 版本元数据，由 db-migration workflow 自动维护';
+COMMENT ON COLUMN public._schema_migrations.status IS 'Migration 状态：pending（执行中）、applied（已应用）、failed（失败）';
+COMMENT ON COLUMN public._schema_migrations.checksum IS 'Migration 文件的 SHA256 校验和';
 
+-- Indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_schema_migrations_status ON public._schema_migrations(status);
 CREATE INDEX IF NOT EXISTS idx_schema_migrations_applied_at ON public._schema_migrations(applied_at DESC);
 
@@ -527,7 +530,7 @@ SET search_path = public, extensions;
 -- =====================================================
 
 -- =====================================================
--- Self-register baseline migration
+-- Self-register this baseline migration
 -- =====================================================
 INSERT INTO public._schema_migrations (seq, name, description, story)
 VALUES ('00001', 'baseline', 'OPC-Starter v1.0 初始 schema：profiles, organizations, organization_members, agent_threads/messages/actions, _schema_migrations', NULL)
