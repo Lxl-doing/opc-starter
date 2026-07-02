@@ -45,6 +45,8 @@ npm run lint
 npm test
 ```
 
+如果你的 AI 编码工具支持本地 skills，可在提交前运行 `/check`。该命令会读取 `.continue/checks/*.md`，对当前 diff 做分层架构、数据访问和 Agent 规范审查。
+
 ### 6. 提交
 
 请遵循 [Conventional Commits](https://www.conventionalcommits.org/) 规范：
