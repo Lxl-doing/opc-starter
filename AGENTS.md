@@ -36,6 +36,8 @@ React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.8
 | `docs/Epics.yaml`                   | 项目进度                         | 项目进度、Story 拆解、版本规划、Epic 状态             |
 | `docs/IHS.md`                       | 仓库驾驭健康报告                 | 代码质量评估、技术债、测试覆盖率、代码腐化度          |
 | `docs/exec-plans/`                  | 历史执行计划                     | 在途计划收尾、历史方案参考                            |
+| `docs/planning-artifacts/`          | BMAD 规划产物                    | PRD、架构、Epic/Story 规划、实施就绪检查              |
+| `docs/implementation-artifacts/`    | BMAD 实施产物                    | Sprint 状态、Story 开发记录、回顾                     |
 | `app/supabase/SUPABASE_COOKBOOK.md` | 数据库操作手册                   | 表结构变更、RLS 策略、SQL 函数、数据库迁移            |
 | `app/supabase/setup.sql`            | 数据库 Schema 事实源             | 建表、加字段、RLS、触发器、profiles 等表              |
 
@@ -47,6 +49,31 @@ React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.8
 4. **数据库变更**：任何 Schema、RLS、触发器、SQL 函数变更 → 先读 `app/supabase/setup.sql` 确认现状，操作步骤参考 `app/supabase/SUPABASE_COOKBOOK.md`。
 5. **质量评估**：代码健康度、技术债分析 → 读 `docs/IHS.md` 获取基线数据。
 6. **规划与执行**：优先更新既有 `docs/exec-plans/`、`docs/Epics.yaml` 或相关文档；确需新增文档时先确认是否已有合适承载位置。
+7. **BMAD 工作流**：需求规划、Story 开发、代码审查 → 使用 `.agents/skills/bmad-*`（Cursor）或对应 IDE 的 skills 目录；不确定时先 invoke `bmad-help`。
+
+## BMAD Method（v6.9 Native Skills）
+
+BMAD 已从旧版 YAML/XML 命令迁移为 **Native Skills** 架构（`SKILL.md` + TOML 配置）。
+
+| 项                         | 路径                       |
+| -------------------------- | -------------------------- |
+| 主配置（安装器管理，只读） | `_bmad/config.toml`        |
+| 团队定制覆盖               | `_bmad/custom/config.toml` |
+| Cursor Skills              | `.agents/skills/bmad-*`    |
+| Claude Code Skills         | `.claude/skills/bmad-*`    |
+
+常用 Skills：`bmad-help`、`bmad-quick-dev`、`bmad-dev-story`、`bmad-code-review`、`bmad-sprint-planning`
+
+产物目录：`docs/planning-artifacts/`、`docs/implementation-artifacts/`（见 `_bmad/config.toml`）
+
+升级命令（维护者）：
+
+```bash
+npx bmad-method@latest install --yes --action update --directory . \
+  --tools cursor,claude-code,opencode,antigravity,kiro,qoder --modules bmm \
+  --user-name opc-starter --communication-language Chinese \
+  --document-output-language Chinese --output-folder _bmad-output --all-stable
+```
 
 ## 禁止事项
 
@@ -68,8 +95,8 @@ React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.8
 
 后续可反哺候选：
 
-- **BMAD v6 Skills 架构升级** — 将旧版 BMAD YAML/XML 工作流迁移为 Native Skills 与 TOML 自定义框架
-- **可选 Node/Nest 网关模板** — 若 starter 引入 `app/server/`，同步加入 server 依赖一致性检查与 Docker 分层构建
+- **可选 Node/Nest 网关模板** — 若 starter 引入 `app/server/`，同步加入 server 依赖一致性检查、Swagger 契约测试与 Docker 分层构建
+- **i18n 规范** — 前端 react-i18next + 后端错误码国际化（可选 SaaS 模板能力）
 
 ## 质量门禁
 
