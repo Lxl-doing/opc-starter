@@ -6,6 +6,10 @@ dist-ssr/
 *.shell
 .kiro
 
+# BMAD 个人配置（不入仓库）
+_bmad/config.user.toml
+_bmad/custom/config.user.toml
+
 # 日志
 logs/
 *.log
