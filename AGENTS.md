@@ -36,8 +36,8 @@ React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.8
 | `docs/Epics.yaml`                   | 项目进度                         | 项目进度、Story 拆解、版本规划、Epic 状态             |
 | `docs/IHS.md`                       | 仓库驾驭健康报告                 | 代码质量评估、技术债、测试覆盖率、代码腐化度          |
 | `docs/exec-plans/`                  | 历史执行计划                     | 在途计划收尾、历史方案参考                            |
-| `docs/planning-artifacts/`          | BMAD 规划产物                    | PRD、架构、Epic/Story 规划、实施就绪检查              |
-| `docs/implementation-artifacts/`    | BMAD 实施产物                    | Sprint 状态、Story 开发记录、回顾                     |
+| `_bmad-output/`                     | BMAD 工作流产物                  | PRD、Epic/Story、Sprint 状态、Quick Dev spec          |
+| `_bmad-output/README.md`            | BMAD 产物索引与命名约定          | 产物路径、与 `docs/` 的分工                           |
 | `app/supabase/SUPABASE_COOKBOOK.md` | 数据库操作手册                   | 表结构变更、RLS 策略、SQL 函数、数据库迁移            |
 | `app/supabase/setup.sql`            | 数据库 Schema 事实源             | 建表、加字段、RLS、触发器、profiles 等表              |
 
@@ -59,12 +59,22 @@ BMAD 已从旧版 YAML/XML 命令迁移为 **Native Skills** 架构（`SKILL.md`
 | -------------------------- | -------------------------- |
 | 主配置（安装器管理，只读） | `_bmad/config.toml`        |
 | 团队定制覆盖               | `_bmad/custom/config.toml` |
-| Cursor Skills              | `.agents/skills/bmad-*`    |
+| Cursor / OpenCode Skills   | `.agents/skills/bmad-*`    |
 | Claude Code Skills         | `.claude/skills/bmad-*`    |
+| Antigravity Skills         | `.agent/skills/bmad-*`     |
+| Kiro Skills                | `.kiro/skills/bmad-*`      |
+| Qoder Skills               | `.qoder/skills/bmad-*`     |
 
 常用 Skills：`bmad-help`、`bmad-quick-dev`、`bmad-dev-story`、`bmad-code-review`、`bmad-sprint-planning`
 
-产物目录：`docs/planning-artifacts/`、`docs/implementation-artifacts/`（见 `_bmad/config.toml`）
+产物目录（统一在 `_bmad-output/`，由 `_bmad/custom/config.toml` 锁定）：
+
+| 子目录                      | 典型内容                              |
+| --------------------------- | ------------------------------------- |
+| `planning-artifacts/`       | PRD、architecture.md、epics.md        |
+| `implementation-artifacts/` | sprint-status.yaml、Story 文件、Retro |
+| `specs/`                    | Quick Dev 独立 spec                   |
+| 根目录                      | `project-context.md` 等               |
 
 升级命令（维护者）：
 
