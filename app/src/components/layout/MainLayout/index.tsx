@@ -37,12 +37,11 @@ function InitialSyncLoader() {
           <h3 className="text-base md:text-lg font-semibold">{t('sync.initialSyncTitle')}</h3>
           {progress && (
             <p className="text-xs md:text-sm text-muted-foreground mt-1">
-              {progress.message ||
-                t('sync.initialSyncProgress', {
-                  table: progress.table,
-                  current: progress.current,
-                  total: progress.total,
-                })}
+              {t('sync.initialSyncProgress', {
+                table: t(`sync.tables.${progress.table}`, { defaultValue: progress.table }),
+                current: progress.current,
+                total: progress.total,
+              })}
             </p>
           )}
         </div>

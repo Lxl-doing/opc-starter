@@ -43,6 +43,9 @@
     "badgeFailed": "{{count}} failed",
     "badgeSyncing": "Syncing",
     "initialSyncTitle": "Syncing data",
-    "initialSyncProgress": "Syncing {{table}}... ({{current}}/{{total}})"
+    "initialSyncProgress": "Syncing {{table}}... ({{current}}/{{total}})",
+    "tables": {
+      "persons": "members"
+    }
   }
 }

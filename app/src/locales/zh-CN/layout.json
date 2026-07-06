@@ -43,6 +43,9 @@
     "badgeFailed": "{{count}} 失败",
     "badgeSyncing": "同步中",
     "initialSyncTitle": "正在同步数据",
-    "initialSyncProgress": "同步 {{table}}... ({{current}}/{{total}})"
+    "initialSyncProgress": "正在同步{{table}}... ({{current}}/{{total}})",
+    "tables": {
+      "persons": "人员"
+    }
   }
 }
