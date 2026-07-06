@@ -121,10 +121,10 @@ function DashboardPage() {
           <h2 className="text-2xl font-semibold text-foreground mb-6">
             {t('dashboard.quickActionsTitle')}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
             {quickActions.map((action) => (
-              <Link key={action.href} to={action.href}>
-                <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer group">
+              <Link key={action.href} to={action.href} className="h-full">
+                <Card className="h-full p-6 flex flex-col hover:shadow-lg transition-shadow cursor-pointer group">
                   <div
                     className={`w-12 h-12 rounded-lg ${action.color} flex items-center justify-center mb-4`}
                   >
@@ -133,8 +133,8 @@ function DashboardPage() {
                   <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
                     {action.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{action.description}</p>
-                  <div className="mt-4 flex items-center text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-sm text-muted-foreground min-h-10">{action.description}</p>
+                  <div className="mt-auto pt-4 flex items-center text-sm text-primary opacity-0 group-hover:opacity-100 transition-opacity">
                     {t('dashboard.enter')} <ArrowRight className="w-4 h-4 ml-1" />
                   </div>
                 </Card>
