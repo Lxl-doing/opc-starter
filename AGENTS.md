@@ -50,22 +50,32 @@ React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.8
 5. **质量评估**：代码健康度、技术债分析 → 读 `docs/IHS.md` 获取基线数据。
 6. **规划与执行**：优先更新既有 `docs/exec-plans/`、`docs/Epics.yaml` 或相关文档；确需新增文档时先确认是否已有合适承载位置。
 7. **BMAD 工作流**：需求规划、Story 开发、代码审查 → 使用 `.agents/skills/bmad-*`（Cursor）或对应 IDE 的 skills 目录；不确定时先 invoke `bmad-help`。
+8. **BMAD Builder（BMB）**：自建 Agent / Module / Workflow → invoke `bmad-agent-builder`、`bmad-module-builder` 或 `bmad-workflow-builder`；产物默认写入仓库根目录 `skills/`。
 
-## BMAD Method（v6.9 Native Skills）
+## BMAD Method（v6.10 Native Skills）
 
 BMAD 已从旧版 YAML/XML 命令迁移为 **Native Skills** 架构（`SKILL.md` + TOML 配置）。
+
+| 模块 | 版本   | 用途                              |
+| ---- | ------ | --------------------------------- |
+| core | 6.10.0 | 共享脚本、配置解析                |
+| bmm  | 6.10.0 | 需求、Story、审查、Quick Dev      |
+| bmb  | v1.5.0 | Agent / Module / Workflow Builder |
 
 | 项                         | 路径                       |
 | -------------------------- | -------------------------- |
 | 主配置（安装器管理，只读） | `_bmad/config.toml`        |
 | 团队定制覆盖               | `_bmad/custom/config.toml` |
+| BMB 模块配置               | `_bmad/bmb/config.yaml`    |
 | Cursor / OpenCode Skills   | `.agents/skills/bmad-*`    |
 | Claude Code Skills         | `.claude/skills/bmad-*`    |
 | Antigravity Skills         | `.agent/skills/bmad-*`     |
 | Kiro Skills                | `.kiro/skills/bmad-*`      |
 | Qoder Skills               | `.qoder/skills/bmad-*`     |
 
-常用 Skills：`bmad-help`、`bmad-quick-dev`、`bmad-dev-story`、`bmad-code-review`、`bmad-sprint-planning`
+常用 Skills（BMM）：`bmad-help`、`bmad-quick-dev`、`bmad-dev-story`、`bmad-code-review`、`bmad-sprint-planning`
+
+常用 Skills（BMB）：`bmad-agent-builder`、`bmad-module-builder`、`bmad-workflow-builder`、`bmad-bmb-setup`
 
 产物目录（统一在 `_bmad-output/`，由 `_bmad/custom/config.toml` 锁定）：
 
@@ -80,10 +90,13 @@ BMAD 已从旧版 YAML/XML 命令迁移为 **Native Skills** 架构（`SKILL.md`
 
 ```bash
 npx bmad-method@latest install --yes --action update --directory . \
-  --tools cursor,claude-code,opencode,antigravity,kiro,qoder --modules bmm \
+  --tools cursor,claude-code,opencode,antigravity,kiro,qoder --modules bmm,bmb \
+  --pin bmb=v1.5.0 \
   --user-name opc-starter --communication-language Chinese \
-  --document-output-language Chinese --output-folder _bmad-output --all-stable
+  --document-output-language Chinese --output-folder _bmad-output
 ```
+
+> **注意**：`--modules` 必须同时包含 `bmm,bmb`。仅安装 `bmb` 会移除 BMM skills。外部模块 `bmb` 在无 `GITHUB_TOKEN` 时 `--all-stable` 可能因 GitHub API 限流失败，请使用 `--pin bmb=v1.5.0`。
 
 ## 禁止事项
 
@@ -103,10 +116,9 @@ npx bmad-method@latest install --yes --action update --directory . \
 - **分层架构守卫** — 检查依赖方向违规和 UI 层直接导入 Supabase/IndexedDB
 - **数据访问与 Agent 规范** — 检查是否绕过 Service/DataService 直接访问数据，以及 Agent/A2UI/LLM 调用是否遵守 starter 约定
 
-后续可反哺候选：
+后续可优化候选：
 
-- **可选 Node/Nest 网关模板** — 若 starter 引入 `app/server/`，同步加入 server 依赖一致性检查、Swagger 契约测试与 Docker 分层构建
-- **i18n 规范** — 前端 react-i18next + 后端错误码国际化（可选 SaaS 模板能力）
+- **i18n 脚手架** — 前端 `react-i18next` 初始化、locale 骨架与 `.cursor/rules/i18n.md`（Supabase-only，不含自建网关）
 
 ## 质量门禁
 
