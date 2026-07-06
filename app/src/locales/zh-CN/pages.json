@@ -1,1 +1,61 @@
-{}
+{
+  "login": {
+    "title": "OPC-Starter",
+    "subtitle": "登录到你的账户",
+    "tagline": "一人公司启动器 · AI-Friendly React Boilerplate",
+    "email": "邮箱",
+    "password": "密码",
+    "submit": "登录",
+    "submitting": "登录中...",
+    "noAccount": "还没有账号？",
+    "register": "注册"
+  },
+  "dashboard": {
+    "subtitle": "一人公司启动器 - AI-Friendly React Boilerplate",
+    "welcomeBack": "欢迎回来，{{name}}！",
+    "quickActionsTitle": "快速入口",
+    "enter": "进入",
+    "systemStatusTitle": "系统状态",
+    "networkStatus": "网络状态",
+    "online": "在线",
+    "offline": "离线",
+    "syncStatus": "同步状态",
+    "syncStatusSyncing": "同步中...",
+    "syncStatusSynced": "已同步",
+    "syncStatusError": "同步异常",
+    "syncStatusIdle": "空闲",
+    "offlineQueue": "离线队列",
+    "queueItems": "{{count}} 项",
+    "lastSync": "最后同步",
+    "featuresTitle": "已集成功能",
+    "agentTipTitle": "💡 提示：使用 Agent Studio",
+    "agentTipBody": "点击右下角的 AI 助手按钮，可以使用自然语言与系统交互。Agent 可以帮助你导航页面、回答问题等。",
+    "learnMore": "了解更多",
+    "quickActions": {
+      "persons": {
+        "title": "组织管理",
+        "description": "管理团队成员和组织架构"
+      },
+      "profile": {
+        "title": "个人中心",
+        "description": "更新个人信息和头像"
+      },
+      "cloudStorage": {
+        "title": "云存储设置",
+        "description": "管理存储和同步设置"
+      },
+      "settings": {
+        "title": "系统设置",
+        "description": "配置应用偏好"
+      }
+    },
+    "features": {
+      "auth": "Supabase Auth 认证",
+      "org": "组织架构管理",
+      "agentStudio": "Agent Studio (A2UI)",
+      "dataSync": "数据同步 (IndexedDB + Realtime)",
+      "tailwind": "Tailwind CSS v4",
+      "typescript": "TypeScript 严格模式"
+    }
+  }
+}

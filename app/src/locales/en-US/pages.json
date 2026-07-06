@@ -1,1 +1,61 @@
-{}
+{
+  "login": {
+    "title": "OPC-Starter",
+    "subtitle": "Sign in to your account",
+    "tagline": "Solo founder starter · AI-Friendly React Boilerplate",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "submitting": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register"
+  },
+  "dashboard": {
+    "subtitle": "Solo founder starter - AI-Friendly React Boilerplate",
+    "welcomeBack": "Welcome back, {{name}}!",
+    "quickActionsTitle": "Quick links",
+    "enter": "Open",
+    "systemStatusTitle": "System status",
+    "networkStatus": "Network",
+    "online": "Online",
+    "offline": "Offline",
+    "syncStatus": "Sync status",
+    "syncStatusSyncing": "Syncing...",
+    "syncStatusSynced": "Synced",
+    "syncStatusError": "Sync error",
+    "syncStatusIdle": "Idle",
+    "offlineQueue": "Offline queue",
+    "queueItems": "{{count}} item(s)",
+    "lastSync": "Last sync",
+    "featuresTitle": "Built-in features",
+    "agentTipTitle": "💡 Tip: Use Agent Studio",
+    "agentTipBody": "Click the AI assistant button to interact with the app in natural language. The agent can help you navigate pages and answer questions.",
+    "learnMore": "Learn more",
+    "quickActions": {
+      "persons": {
+        "title": "Organization",
+        "description": "Manage team members and org structure"
+      },
+      "profile": {
+        "title": "Profile",
+        "description": "Update your profile and avatar"
+      },
+      "cloudStorage": {
+        "title": "Cloud storage",
+        "description": "Manage storage and sync settings"
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Configure app preferences"
+      }
+    },
+    "features": {
+      "auth": "Supabase Auth",
+      "org": "Organization management",
+      "agentStudio": "Agent Studio (A2UI)",
+      "dataSync": "Data sync (IndexedDB + Realtime)",
+      "tailwind": "Tailwind CSS v4",
+      "typescript": "TypeScript strict mode"
+    }
+  }
+}
