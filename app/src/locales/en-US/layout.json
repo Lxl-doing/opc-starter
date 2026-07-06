@@ -1,0 +1,10 @@
+{
+  "header": {
+    "orgManagement": "Organization",
+    "cloudStorageSettings": "Cloud storage settings",
+    "profile": "Profile",
+    "signOut": "Sign out",
+    "defaultUser": "User",
+    "languageSelector": "Change language"
+  }
+}

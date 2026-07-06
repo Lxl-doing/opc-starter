@@ -10,18 +10,19 @@
 
 ## 技术栈
 
-React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.80 · Zustand 5.0 · Qwen-Plus (百炼) · A2UI v0.8
+React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.80 · Zustand 5.0 · Qwen-Plus (百炼) · A2UI v0.8 · react-i18next
 
 ## 详细规范（按需加载）
 
-| 规范                 | 文件                                 | 自动触发        |
-| -------------------- | ------------------------------------ | --------------- |
-| TypeScript 严格类型  | `.cursor/rules/typescript-strict.md` | `*.ts, *.tsx`   |
-| Tailwind CSS v4 语法 | `.cursor/rules/tailwind-v4.md`       | `*.tsx, *.css`  |
-| Agent Studio 开发    | `.cursor/rules/agent-studio.md`      | `agent/**/*`    |
-| Supabase 数据模式    | `.cursor/rules/supabase-patterns.md` | `services/**/*` |
-| 测试规范             | `.cursor/rules/testing.md`           | `*.test.*`      |
-| 项目扩展指南         | `.cursor/rules/project-extension.md` | `pages/**/*`    |
+| 规范                 | 文件                                 | 自动触发                                       |
+| -------------------- | ------------------------------------ | ---------------------------------------------- |
+| TypeScript 严格类型  | `.cursor/rules/typescript-strict.md` | `*.ts, *.tsx`                                  |
+| Tailwind CSS v4 语法 | `.cursor/rules/tailwind-v4.md`       | `*.tsx, *.css`                                 |
+| Agent Studio 开发    | `.cursor/rules/agent-studio.md`      | `agent/**/*`                                   |
+| Supabase 数据模式    | `.cursor/rules/supabase-patterns.md` | `services/**/*`                                |
+| 测试规范             | `.cursor/rules/testing.md`           | `*.test.*`                                     |
+| 项目扩展指南         | `.cursor/rules/project-extension.md` | `pages/**/*`                                   |
+| i18n 国际化          | `.cursor/rules/i18n.md`              | `locales/**/*`、用户可见文案、`useTranslation` |
 
 ## 技术文档（按需自动引入）
 
@@ -40,16 +41,18 @@ React 19.1 · TypeScript 5.9 · Vite 7.1 · **Tailwind CSS 4.1** · Supabase 2.8
 | `_bmad-output/README.md`            | BMAD 产物索引与命名约定          | 产物路径、与 `docs/` 的分工                           |
 | `app/supabase/SUPABASE_COOKBOOK.md` | 数据库操作手册                   | 表结构变更、RLS 策略、SQL 函数、数据库迁移            |
 | `app/supabase/setup.sql`            | 数据库 Schema 事实源             | 建表、加字段、RLS、触发器、profiles 等表              |
+| `app/src/locales/`                  | 前端 i18n 文案事实源             | 多语言、locale、翻译、`useTranslation`、用户可见文案  |
 
 ### 路由规则说明
 
 1. **AI 助手开发**：涉及 `ai-assistant`、SSE 流、Agent Tool、`renderUI`、LLM 调用 → 先读 `docs/API.md`，工具注册还需参考 `docs/Architecture.md` 扩展指南。
-2. **UI 组件开发**：新增或修改 UI 组件 → 先读 `docs/DESIGN_TOKENS.md` 确认设计语言，再按 `docs/CONVENTIONS.md` 命名和分层。
+2. **UI 组件开发**：新增或修改 UI 组件 → 先读 `docs/DESIGN_TOKENS.md` 确认设计语言，再按 `docs/CONVENTIONS.md` 命名和分层；涉及用户可见文案时读 `.cursor/rules/i18n.md`。
 3. **页面/模块扩展**：新增页面、路由、业务模块 → 先读 `docs/Architecture.md`、`docs/CONVENTIONS.md` 和 `.cursor/rules/project-extension.md`。
 4. **数据库变更**：任何 Schema、RLS、触发器、SQL 函数变更 → 先读 `app/supabase/setup.sql` 确认现状，操作步骤参考 `app/supabase/SUPABASE_COOKBOOK.md`。
 5. **质量评估**：代码健康度、技术债分析 → 读 `docs/IHS.md` 获取基线数据。
 6. **规划与执行**：优先更新既有 `docs/exec-plans/`、`docs/Epics.yaml` 或相关文档；确需新增文档时先确认是否已有合适承载位置。
 7. **BMAD 工作流**：需求规划、Story 开发、代码审查 → 使用 `.agents/skills/bmad-*`（Cursor）或对应 IDE 的 skills 目录；不确定时先 invoke `bmad-help`。
+8. **国际化（i18n）**：新增或修改用户可见文案 → 先读 `.cursor/rules/i18n.md`，在 `app/src/locales/zh-CN` 与 `en-US` 同步维护 key；初始化见 `app/src/lib/i18n.ts`。
 
 ## BMAD Method（v6.9 Native Skills）
 
@@ -105,8 +108,7 @@ npx bmad-method@latest install --yes --action update --directory . \
 
 后续可反哺候选：
 
-- **可选 Node/Nest 网关模板** — 若 starter 引入 `app/server/`，同步加入 server 依赖一致性检查、Swagger 契约测试与 Docker 分层构建
-- **i18n 规范** — 前端 react-i18next + 后端错误码国际化（可选 SaaS 模板能力）
+- **Epic-27 全站 i18n 迁移** — 逐页将现有硬编码中文迁入 `app/src/locales/`
 
 ## 质量门禁
 
