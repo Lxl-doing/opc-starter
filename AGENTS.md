@@ -108,15 +108,25 @@ npx bmad-method@latest install --yes --action update --directory . \
 
 后续可反哺候选：
 
-- **Epic-27 全站 i18n 迁移** — 逐页将现有硬编码中文迁入 `app/src/locales/`
+- **E2E 选择器迁移** — Cypress 逐步改用 `data-testid`，减少对文案/i18n 的耦合
 
 ## 质量门禁
 
+AI Agent 在 commit / push / PR 前必须跑完。**Husky 仅 lint-staged，不跑单测/E2E/构建。**
+
 ```bash
-npm run ai:check    # lint:check + format:check + type-check + coverage + build
-npm run test        # 单元测试
-npm run coverage    # 覆盖率检查（阈值: lines 25%, branches 18%）
+# PR 必过（根目录或 app/ 均可）
+npm run lint:check && npm run type-check && npm run test && npm run build
+npm run test:e2e:headless   # 改 UI / 文案 / i18n / 路由 / 认证时必跑
+
+# 一键全量（format + coverage + build + E2E）
+./scripts/quality_check.sh
 ```
+
+- 用 `lint:check`，不要用 `lint`（PR Check 不带 `--fix`）
+- `npm test` 必须**全量**，禁止只 `--run` 单个文件
+- i18n 改动：同步 `*.test.*` / Cypress 断言，见 `.cursor/rules/i18n.md`
+- PR 前跑 `/check`（`.continue/checks/`）
 
 ## Cursor Cloud specific instructions
 

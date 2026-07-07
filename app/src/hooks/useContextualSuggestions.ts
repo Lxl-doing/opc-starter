@@ -49,9 +49,6 @@ export function useContextualSuggestions(): UseContextualSuggestionsReturn {
   const { i18n } = useTranslation()
 
   return useMemo(() => {
-    // 语言切换时重新翻译推荐文案
-    void i18n.language
-
     const { suggestions, emptyStateHint, contextInfo } = getContextualSuggestions(context)
 
     // 转换为 ContextualSuggestion 格式

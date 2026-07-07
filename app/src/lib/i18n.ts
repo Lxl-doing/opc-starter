@@ -33,7 +33,10 @@ const resources = {
   },
 } as const
 
-const isTest = typeof process !== 'undefined' && process.env.NODE_ENV === 'test'
+// Vitest: process.env.NODE_ENV === 'test'；Cypress (vite --mode test): import.meta.env.MODE === 'test'
+const isTest =
+  import.meta.env.MODE === 'test' ||
+  (typeof process !== 'undefined' && process.env.NODE_ENV === 'test')
 
 void i18n
   .use(LanguageDetector)
