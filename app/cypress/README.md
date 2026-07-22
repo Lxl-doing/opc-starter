@@ -197,7 +197,7 @@ describe('功能模块名称', () => {
 
 ## 🔧 配置说明
 
-### cypress.config.js
+### cypress.config.cjs
 
 主要配置项：
 
